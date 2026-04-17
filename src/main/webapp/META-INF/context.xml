@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Environment name="release" value="false" type="java.lang.Boolean" override="false"/>
+
+    <Resource name="jdbc/local" auth="Container" type="javax.sql.DataSource" driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/userdb" username="wai" password="wai" maxActive="250" maxIdle="5" />
+
+    <Resource name="jdbc/production" auth="Container" type="javax.sql.DataSource" driverClassName="org.postgresql.Driver" url="jdbc:postgresql://PROD_DB_HOST:5432/PROD_DB_NAME" username="PROD_DB_USER" password="PROD_DB_PASSWORD" maxActive="250" maxIdle="5" />
+</Context>
