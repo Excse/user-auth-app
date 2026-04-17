@@ -1,16 +1,17 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import org.mindrot.jbcrypt.BCrypt;
-
-import dao.DAOFactory;
-import dao.UserDAOImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import dao.DAOFactory;
+import dao.UserDAOImpl;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
@@ -43,7 +44,9 @@ public class RegisterServlet extends HttpServlet {
         }
 
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        if (!USER_DAO.createUser(username, hashedPassword, firstName, lastName, email)) {
+        Locale locale = req.getLocale();
+
+        if (!USER_DAO.createUser(username, hashedPassword, firstName, lastName, email, locale)) {
             req.setAttribute("error", "Failed to create user");
             req.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(req, res);
             return;

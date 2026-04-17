@@ -1,16 +1,18 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import org.mindrot.jbcrypt.BCrypt;
-
-import dao.DAOFactory;
-import dao.UserDAOImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import dao.DAOFactory;
+import dao.UserDAOImpl;
 import model.User;
 
 @WebServlet("/login")
@@ -29,12 +31,15 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         User user = USER_DAO.getUserByUsername(username);
-
         if (user == null || !BCrypt.checkpw(password, user.getPassword())) {
             req.setAttribute("error", "Invalid username or password");
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, res);
             return;
         }
+
+        // Update last accessed timestamp
+        user.setLastAccessed(new Timestamp(new Date().getTime()));
+        USER_DAO.updateUser(user);
 
         req.getSession().setAttribute("user", user);
         res.sendRedirect(req.getContextPath() + "/app/dashboard");

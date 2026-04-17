@@ -1,7 +1,14 @@
 package model;
 
+import java.sql.Timestamp;
+import java.util.Locale;
+
 public class User {
-    
+
+    private Timestamp lastAccessed;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
+    private Locale locale;
     private String username;
     private String password;
     private String firstName;
@@ -9,13 +16,50 @@ public class User {
     private String email;
     private int id;
 
-    public User(int id, String username, String password, String firstName, String lastName, String email) {
+    public User(int id, String username, String password, String firstName, String lastName, String email,
+            Locale locale, Timestamp createdAt, Timestamp updatedAt, Timestamp lastAccessed) {
+        this.lastAccessed = lastAccessed;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.locale = locale;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.id = id;
+    }
+
+    public void setLastAccessed(Timestamp lastAccessed) {
+        this.lastAccessed = lastAccessed;
+    }
+
+    public Timestamp getLastAccessed() {
+        return lastAccessed;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+    }
+
+    public Locale getLocale() {
+        return locale;
     }
 
     public void setUsername(String username) {

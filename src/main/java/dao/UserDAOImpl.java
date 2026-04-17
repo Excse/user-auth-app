@@ -3,8 +3,11 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import model.User;
 import util.JNDIFactory;
@@ -13,8 +16,8 @@ public class UserDAOImpl implements IUserDAO {
 
     private static final JNDIFactory JNDI_FACTORY = JNDIFactory.getInstance();
 
-    private static final String UPDATE_USER_SQL = "UPDATE users SET username = ?, password = ?, first_name = ?, last_name = ?, email = ? WHERE id = ?";
-    private static final String ADD_USER_SQL = "INSERT INTO users (username, password, first_name, last_name, email) VALUES (?, ?, ?, ?, ?)";
+    private static final String UPDATE_USER_SQL = "UPDATE users SET username = ?, password = ?, first_name = ?, last_name = ?, email = ?, created_at = ?, updated_at = ?, last_access = ?, locale = ? WHERE id = ?";
+    private static final String ADD_USER_SQL = "INSERT INTO users (username, password, first_name, last_name, email, locale) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String GET_USER_BY_USERNAME_SQL = "SELECT * FROM users WHERE username = ?";
     private static final String GET_USER_BY_EMAIL_SQL = "SELECT * FROM users WHERE email = ?";
     private static final String GET_USER_BY_ID_SQL = "SELECT * FROM users WHERE id = ?";
@@ -27,6 +30,20 @@ public class UserDAOImpl implements IUserDAO {
         this.databaseSource = databaseSource;
     }
 
+    private User mapResultSetToUser(ResultSet result) throws Exception {
+        return new User(
+                result.getInt("id"),
+                result.getString("username"),
+                result.getString("password"),
+                result.getString("first_name"),
+                result.getString("last_name"),
+                result.getString("email"),
+                Locale.forLanguageTag(result.getString("locale")),
+                result.getTimestamp("created_at"),
+                result.getTimestamp("updated_at"),
+                result.getTimestamp("last_access"));
+    }
+
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
@@ -36,13 +53,7 @@ public class UserDAOImpl implements IUserDAO {
 
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                users.add(new User(
-                        result.getInt("id"),
-                        result.getString("username"),
-                        result.getString("password"),
-                        result.getString("first_name"),
-                        result.getString("last_name"),
-                        result.getString("email")));
+                users.add(mapResultSetToUser(result));
             }
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -59,13 +70,7 @@ public class UserDAOImpl implements IUserDAO {
 
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                return new User(
-                        result.getInt("id"),
-                        result.getString("username"),
-                        result.getString("password"),
-                        result.getString("first_name"),
-                        result.getString("last_name"),
-                        result.getString("email"));
+                return mapResultSetToUser(result);
             }
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -86,13 +91,7 @@ public class UserDAOImpl implements IUserDAO {
 
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                return new User(
-                        result.getInt("id"),
-                        result.getString("username"),
-                        result.getString("password"),
-                        result.getString("first_name"),
-                        result.getString("last_name"),
-                        result.getString("email"));
+                return mapResultSetToUser(result);
             }
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -113,13 +112,7 @@ public class UserDAOImpl implements IUserDAO {
 
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                return new User(
-                        result.getInt("id"),
-                        result.getString("username"),
-                        result.getString("password"),
-                        result.getString("first_name"),
-                        result.getString("last_name"),
-                        result.getString("email"));
+                return mapResultSetToUser(result);
             }
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -129,8 +122,10 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
-    public boolean createUser(String username, String password, String firstName, String lastName, String email) {
-        if (username == null || password == null || firstName == null || lastName == null || email == null) {
+    public boolean createUser(String username, String password, String firstName, String lastName, String email,
+            Locale locale) {
+        if (username == null || password == null || firstName == null || lastName == null || email == null
+                || locale == null) {
             return false;
         }
 
@@ -141,6 +136,7 @@ public class UserDAOImpl implements IUserDAO {
             statement.setString(3, firstName);
             statement.setString(4, lastName);
             statement.setString(5, email);
+            statement.setString(6, locale.toLanguageTag());
 
             return statement.executeUpdate() > 0;
         } catch (Exception exception) {
@@ -181,7 +177,11 @@ public class UserDAOImpl implements IUserDAO {
             statement.setString(3, user.getFirstName());
             statement.setString(4, user.getLastName());
             statement.setString(5, user.getEmail());
-            statement.setInt(6, user.getId());
+            statement.setTimestamp(6, user.getCreatedAt());
+            statement.setTimestamp(7, new Timestamp(new Date().getTime()));
+            statement.setTimestamp(8, user.getLastAccessed());
+            statement.setString(9, user.getLocale().toLanguageTag());
+            statement.setInt(10, user.getId());
 
             return statement.executeUpdate() > 0;
         } catch (Exception exception) {

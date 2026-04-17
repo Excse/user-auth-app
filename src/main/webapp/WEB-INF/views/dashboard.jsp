@@ -29,7 +29,6 @@
       <section class="hero-shell p-4 p-md-5 mb-4 animated-rise">
         <div class="row align-items-center g-3">
           <div class="col-md-8">
-            <p class="text-uppercase small fw-semibold mb-1">Signed-in space</p>
             <h1 class="display-6 fw-bold mb-2">
               <%= "Welcome, " + user.getFirstName() + "!" %>
             </h1>
@@ -45,7 +44,7 @@
           <div class="col-md-6 col-lg-4">
             <div class="feature-card p-3 h-100">
               <div class="info-label mb-1">ID</div>
-              <div class="metric-badge"><%= user.getId() %></div>
+              <div class="fw-semibold"><%= user.getId() %></div>
             </div>
           </div>
           <div class="col-md-6 col-lg-4">
@@ -70,6 +69,30 @@
             <div class="feature-card p-3 h-100">
               <div class="info-label mb-1">Email</div>
               <div class="fw-semibold"><%= user.getEmail() %></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card p-3 h-100">
+              <div class="info-label mb-1">Account Created</div>
+              <div class="fw-semibold"><%= request.getAttribute("created_at") %></div>
+            </div>  
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card p-3 h-100">
+              <div class="info-label mb-1">Last Updated</div>
+              <div class="fw-semibold"><%= request.getAttribute("updated_at") %></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card p-3 h-100">
+              <div class="info-label mb-1">Last Accessed</div>
+              <div class="fw-semibold"><%= request.getAttribute("last_accessed") %></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card p-3 h-100">
+              <div class="info-label mb-1">Locale</div>
+              <div class="fw-semibold"><%= request.getAttribute("locale") %></div>
             </div>
           </div>
         </div>
