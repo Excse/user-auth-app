@@ -8,7 +8,7 @@ public class DAOFactory {
 
     public static UserDAOImpl getUserDAO() {
         try {
-            boolean is_release = JNDI_FACTORY.getEnvironmentAsBoolean("release");
+            boolean is_release = (Boolean) JNDI_FACTORY.getEnvironment("release");
             if (!is_release) {
                 return new UserDAOImpl("jdbc/local");
             } else {

@@ -34,41 +34,16 @@ public class JNDIFactory {
         }
 
         return connection;
-
     }
 
-    public String getEnvironmentAsString(String name) throws NamingException {
+    public Object getEnvironment(String name) throws NamingException {
         InitialContext initialContext = new InitialContext();
         Context enviromentContext = (Context) initialContext.lookup("java:comp/env");
 
         try {
-            return (String) enviromentContext.lookup(name);
+            return enviromentContext.lookup(name);
         } catch (NamingException exception) {
-            System.out.println("String Environment '" + name + "' is missing.");
-            return null;
-        }
-    }
-
-    public Integer getEnvirontmenAsInteger(String name) throws NamingException {
-        InitialContext initialContext = new InitialContext();
-        Context enviromentContext = (Context) initialContext.lookup("java:comp/env");
-
-        try {
-            return (Integer) enviromentContext.lookup(name);
-        } catch (NamingException n) {
-            System.out.println("Integer Environment '" + name + "' is missing.");
-            return null;
-        }
-    }
-
-    public Boolean getEnvironmentAsBoolean(String name) throws NamingException {
-        InitialContext initialContext = new InitialContext();
-        Context enviromentContext = (Context) initialContext.lookup("java:comp/env");
-
-        try {
-            return (Boolean) enviromentContext.lookup(name);
-        } catch (NamingException n) {
-            System.out.println("Boolean Environment '" + name + "' is missing.");
+            System.out.println("Environment '" + name + "' is missing.");
             return null;
         }
     }

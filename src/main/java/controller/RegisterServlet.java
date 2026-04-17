@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import dao.DAOFactory;
 import dao.UserDAOImpl;
 import jakarta.servlet.ServletException;
@@ -40,7 +42,8 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        if (!USER_DAO.createUser(username, password, firstName, lastName, email)) {
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        if (!USER_DAO.createUser(username, hashedPassword, firstName, lastName, email)) {
             req.setAttribute("error", "Failed to create user");
             req.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(req, res);
             return;

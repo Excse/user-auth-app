@@ -56,12 +56,6 @@
           </div>
           <div class="col-md-6 col-lg-4">
             <div class="feature-card p-3 h-100">
-              <div class="info-label mb-1">Password</div>
-              <div class="fw-semibold"><%= user.getPassword() %></div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="feature-card p-3 h-100">
               <div class="info-label mb-1">First Name</div>
               <div class="fw-semibold"><%= user.getFirstName() %></div>
             </div>

@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import dao.DAOFactory;
 import dao.UserDAOImpl;
 import jakarta.servlet.ServletException;
@@ -27,7 +29,8 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         User user = USER_DAO.getUserByUsername(username);
-        if (user == null || !user.getPassword().equals(password)) {
+
+        if (user == null || !BCrypt.checkpw(password, user.getPassword())) {
             req.setAttribute("error", "Invalid username or password");
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, res);
             return;
