@@ -51,44 +51,12 @@
               Lightweight servlet starter
             </p>
             <h1 class="display-5 fw-bold mb-3">
-              A cleaner front door for your auth app
+              A polished login experience for your Java web app
             </h1>
             <p class="mb-4 opacity-75">
-              This Bootstrap-powered experience gives your login flow a strong
-              visual identity while keeping your existing Java servlet
-              architecture untouched.
+              This sample project demonstrates a simple user authentication system built with Java Servlets, JSP, and Bootstrap. It provides a clean starting point for adding secure login functionality to your own web applications.
             </p>
           </div>
-        </div>
-      </section>
-
-      <section class="row g-4 mt-1 animated-rise-delay">
-        <div class="col-md-4">
-          <article class="feature-card p-4 h-100">
-            <h5 class="mb-2">Reliable Routing</h5>
-            <p class="mb-0 text-secondary">
-              Context-path-safe links ensure this UI works in local and deployed
-              environments.
-            </p>
-          </article>
-        </div>
-        <div class="col-md-4">
-          <article class="feature-card p-4 h-100">
-            <h5 class="mb-2">Mobile Friendly</h5>
-            <p class="mb-0 text-secondary">
-              Fluid grid and spacing scale naturally from phones to desktop
-              without special templates.
-            </p>
-          </article>
-        </div>
-        <div class="col-md-4">
-          <article class="feature-card p-4 h-100">
-            <h5 class="mb-2">Ready to Extend</h5>
-            <p class="mb-0 text-secondary">
-              Drop in validation, flash messages, and user profile screens using
-              the same style system.
-            </p>
-          </article>
         </div>
       </section>
     </main>
