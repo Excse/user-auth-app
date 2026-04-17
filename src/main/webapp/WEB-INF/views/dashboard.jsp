@@ -97,6 +97,17 @@
           </div>
         </div>
       </section>
+
+      <section class="section-card p-4 p-md-5 mt-4 animated-rise-delay">
+        <h2 class="h4 mb-3">Secret Image</h2>
+        <p class="opacity-75 mb-3">Served directly by the protected Secret Servlet endpoint.</p>
+        <img
+          src="<%= request.getContextPath() %>/app/secret"
+          alt="Secret"
+          class="img-fluid rounded"
+          loading="lazy"
+        />
+      </section>
     </main>
 
     <script src="<%= request.getContextPath() %>/js/bootstrap.js"></script>
