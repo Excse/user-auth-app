@@ -1,8 +1,7 @@
 :root {
-  --brand-primary: #0f4c5c;
-  --brand-accent: #e36414;
-  --brand-accent-hover: #c85210;
-  --brand-highlight: #9a031e;
+  --primary: #0f4c5c;
+  --accent: #e36414;
+  --accent-hover: #c85210;
 
   --text-main: #1f2933;
   --text-muted: #52606d;
@@ -29,8 +28,10 @@
 
 body {
   min-height: 100vh;
-  color: var(--text-main);
+
   font-family: "Trebuchet MS", "Gill Sans", "Segoe Print", sans-serif;
+  color: var(--text-main);
+
   background:
     radial-gradient(circle at 0% 0%, rgba(227, 100, 20, 0.22), transparent 34%),
     radial-gradient(circle at 100% 100%, rgba(15, 76, 92, 0.25), transparent 38%),
@@ -40,7 +41,7 @@ body {
 .brand-mark {
   font-weight: 800;
   letter-spacing: 0.04em;
-  color: var(--brand-primary);
+  color: var(--primary);
 }
 
 .glass-nav {
@@ -90,43 +91,27 @@ body {
 }
 
 .btn-brand {
-  background-color: var(--brand-accent);
-  border-color: var(--brand-accent);
   color: #fff;
+  background-color: var(--accent);
+  border-color: var(--accent);
 }
 
 .btn-brand:hover,
 .btn-brand:focus {
-  background-color: var(--brand-accent-hover);
-  border-color: var(--brand-accent-hover);
   color: #fff;
-}
-
-.metric-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.4rem;
-  padding: 0.35rem 0.6rem;
-  border-radius: 999px;
-  font-weight: 700;
-  background-color: rgba(15, 76, 92, 0.12);
-  color: var(--brand-primary);
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 .info-label {
-  color: var(--text-muted);
   font-size: 0.85rem;
+  color: var(--text-muted);
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
 .animated-rise {
   animation: rise-in 0.65s ease both;
-}
-
-.animated-rise-delay {
-  animation: rise-in 0.65s ease 0.12s both;
 }
 
 @keyframes rise-in {
@@ -137,11 +122,5 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-shell {
-    border-radius: var(--radius-md);
   }
 }

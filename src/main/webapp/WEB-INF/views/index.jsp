@@ -51,10 +51,10 @@
               Lightweight servlet starter
             </p>
             <h1 class="display-5 fw-bold mb-3">
-              A polished login experience for your Java web app
+              A login experience for your Java web app
             </h1>
             <p class="mb-4 opacity-75">
-              This sample project demonstrates a simple user authentication system built with Java Servlets, JSP, and Bootstrap. It provides a clean starting point for adding secure login functionality to your own web applications.
+              This sample project demonstrates a simple user authentication system built with Java Servlets, JSP, and Bootstrap.
             </p>
           </div>
         </div>

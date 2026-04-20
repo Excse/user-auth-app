@@ -37,7 +37,7 @@
         </div>
       </section>
 
-      <section class="section-card p-4 p-md-5 animated-rise-delay">
+      <section class="section-card p-4 p-md-5 animated-rise">
         <h2 class="h4 mb-4">User Information</h2>
 
         <div class="row g-3">
@@ -98,7 +98,7 @@
         </div>
       </section>
 
-      <section class="section-card p-4 p-md-5 mt-4 animated-rise-delay">
+      <section class="section-card p-4 p-md-5 mt-4 animated-rise">
         <h2 class="h4 mb-3">Secret Image</h2>
         <p class="opacity-75 mb-3">Served directly by the protected Secret Servlet endpoint.</p>
         <img
